@@ -39,6 +39,9 @@ const CreateItemInput = styled.input`
 
   border-radius: 5px;
   border: 1px solid #4aa5d4;
+
+  color: #4aa5d4;
+  font-size: 16px;
 `;
 
 const Label = styled.label`

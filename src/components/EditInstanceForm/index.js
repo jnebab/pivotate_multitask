@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: none;
@@ -9,9 +9,21 @@ const Button = styled.button`
   padding: 0;
   color: #bbbbbb;
   transition: color 0.5s ease;
+  margin: 0.1em;
   &:hover {
-    color: ${props => props.hoverColor || '#000000'};
+    color: ${(props) => props.hoverColor || "#000000"};
   }
+`;
+
+const EditItemInput = styled.input`
+  padding: 1em 1.5em;
+  margin-left: 1em;
+
+  border-radius: 5px;
+  border: 1px solid #4aa5d4;
+
+  color: #4aa5d4;
+  font-size: 16px;
 `;
 
 function EditInstanceForm({
@@ -26,15 +38,16 @@ function EditInstanceForm({
   return (
     <>
       <label htmlFor={id}>
-        {label}
-        <input
+        {" "}
+        {label}{" "}
+        <EditItemInput
           id={id}
           type="text"
           value={value}
           onChange={onChange}
           disabled={disabled}
-        />
-      </label>
+        />{" "}
+      </label>{" "}
       <Button
         type="button"
         hoverColor="#00FF00"

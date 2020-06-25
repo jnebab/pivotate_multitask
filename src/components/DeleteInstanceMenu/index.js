@@ -1,5 +1,5 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
 const Button = styled.button`
   background: none;
@@ -10,8 +10,9 @@ const Button = styled.button`
   color: #bbbbbb;
   transition: color 0.5s ease;
   &:hover {
-    color: ${props => props.hoverColor || '#000000'};
+    color: ${(props) => props.hoverColor || "#000000"};
   }
+  margin: 0.1em;
 `;
 
 const Container = styled.div`
@@ -21,14 +22,10 @@ const Container = styled.div`
   border: 1px solid #eeeeee;
 `;
 
-function DeleteInstanceMenu({
-  onDelete,
-  onCancel,
-  disabled,
-}) {
+function DeleteInstanceMenu({ onDelete, onCancel, disabled }) {
   return (
     <Container>
-      Delete?
+      Delete ?
       <Button
         type="button"
         hoverColor="#00FF00"
@@ -46,7 +43,7 @@ function DeleteInstanceMenu({
         &#10005;
       </Button>
     </Container>
-  )
+  );
 }
 
 export default DeleteInstanceMenu;
