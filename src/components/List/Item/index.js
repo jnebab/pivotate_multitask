@@ -1,38 +1,36 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { EXECUTE } from '@nostack/no-stack';
-import compose from '@shopify/react-compose';
-import { graphql } from '@apollo/react-hoc';
+import React, { useState } from "react";
+import styled from "styled-components";
+import { EXECUTE } from "@nostack/no-stack";
+import compose from "@shopify/react-compose";
+import { graphql } from "@apollo/react-hoc";
 
 import {
   UPDATE_ITEM_FOR_LIST_ACTION_ID,
   DELETE_ITEM_FOR_LIST_ACTION_ID,
-} from '../../../config';
+} from "../../../config";
 
-import EditInstanceForm from '../../EditInstanceForm';
-import DeleteInstanceMenu from '../../DeleteInstanceMenu';
-
-
-
-
+import EditInstanceForm from "../../EditInstanceForm";
+import DeleteInstanceMenu from "../../DeleteInstanceMenu";
 
 // add styling here
-const ItemStyleWrapper = styled.div(({
-  selected,
-  isDeleting,
-}) => `
-  margin: 2em 1em;
+const ItemStyleWrapper = styled.div(
+  ({ selected, isDeleting }) => `
+  margin: 1em 0;
   padding: 1.5em;
-  border: ${selected ? '1px solid aquamarine': '1px solid white'};
+  border: ${selected ? "1px solid aquamarine" : "1px solid white"};
   border-radius: 10px;
-  box-shadow: 5px 5px 10px #888888;
-  background-color: ${isDeleting && 'tomato'};
-  cursor: ${selected ? 'auto' : 'pointer'};
+  box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.1);
+  background-color: ${isDeleting && "tomato"};
+  cursor: ${selected ? "auto" : "pointer"};
+
+  font-size: 18px;
+  color: #4aa5d4;
 
   &:hover {
     border: 1px solid aquamarine;
   }
-`);
+`
+);
 
 const Button = styled.button`
   background: none;
@@ -43,7 +41,7 @@ const Button = styled.button`
   color: #bbbbbb;
   transition: color 0.5s ease;
   &:hover {
-    color: ${props => props.hoverColor || '#000000'};
+    color: ${(props) => props.hoverColor || "#000000"};
   }
 `;
 
@@ -62,13 +60,11 @@ function Item({
   const [isDeleteMode, updateIsDeleteMode] = useState(false);
   const [isDeleting, updateIsDeleting] = useState(false);
 
-  
-
-
   if (!selected) {
     return (
       <ItemStyleWrapper onClick={() => onSelect(item.id)}>
-        { itemValue }
+        {" "}
+        {itemValue}{" "}
       </ItemStyleWrapper>
     );
   }
@@ -103,14 +99,14 @@ function Item({
     return (
       <ItemStyleWrapper>
         <EditInstanceForm
-          id={ item.id }
+          id={item.id}
           label="Item Value:"
-          value={ itemValue }
+          value={itemValue}
           onChange={handleItemValueChange}
           onSave={handleItemValueSave}
           onCancel={handleCancelEdit}
           disabled={isSaving}
-        />
+        />{" "}
       </ItemStyleWrapper>
     );
   }
@@ -127,7 +123,7 @@ function Item({
             instanceId: item.id,
           }),
         },
-        refetchQueries
+        refetchQueries,
       });
     } catch (e) {
       updateIsDeleting(false);
@@ -140,44 +136,34 @@ function Item({
 
   if (isDeleteMode) {
     return (
-      <ItemStyleWrapper
-        selected={selected}
-        isDeleting={isDeleting}
-      >
-        { itemValue }
+      <ItemStyleWrapper selected={selected} isDeleting={isDeleting}>
+        {" "}
+        {itemValue}{" "}
         <DeleteInstanceMenu
           onDelete={handleDelete}
           onCancel={handleCancelDelete}
           disabled={isDeleting}
-        />
+        />{" "}
       </ItemStyleWrapper>
     );
   }
 
   return (
     <ItemStyleWrapper selected={selected}>
-      { itemValue }
-      <Button
-        type="button"
-        onClick={() => updateIsEditMode(true)}
-      >
+      {" "}
+      {itemValue}{" "}
+      <Button type="button" onClick={() => updateIsEditMode(true)}>
         &#9998;
       </Button>
-      <Button
-        type="button"
-        onClick={() => updateIsDeleteMode(true)}
-      >
+      <Button type="button" onClick={() => updateIsDeleteMode(true)}>
         &#128465;
       </Button>
-
-      
-
-
     </ItemStyleWrapper>
   );
 }
 
 export default compose(
-  graphql(EXECUTE, { name: 'updateInstance' }),
-  graphql(EXECUTE, { name: 'deleteInstance' })
+  graphql(EXECUTE, { name: "updateInstance" }),
+
+  graphql(EXECUTE, { name: "deleteInstance" })
 )(Item);

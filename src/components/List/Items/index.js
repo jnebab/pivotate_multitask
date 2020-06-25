@@ -17,8 +17,10 @@ import { LIST_RELATIONSHIPS, SOURCE_LIST_QUERY } from "../../source-props/list";
 const ItemsStyleWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: column;
+  width: 50%;
+  margin: 0 auto;
 `;
 // np__added_end unit: list, comp: Items, loc: styling
 
